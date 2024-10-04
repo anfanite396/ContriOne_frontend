@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,49 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+/* Apply position to the parent element */
+nav {
+  position: relative; /* or absolute, sticky, etc. depending on your layout needs */
+}
+
+/* Ensure the right-aligned links are positioned properly */
+.auth-links {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.overview-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.user-info {
+  flex: 1;
+  padding: 20px;
+}
+
+.heatmap {
+  flex: 2;
+  padding: 20px;
+  border-left: 1px solid #ccc;
+}
+
+.repo-list ul {
+  list-style-type: none;
+}
+
+.repo-list li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.platform-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
 }

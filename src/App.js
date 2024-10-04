@@ -1,25 +1,57 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes, useParams } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Overview from './components/Overview';
+import Repositories from './components/Repositories';
+import Login from './components/Login';
+import Register from './components/Register';
+import EditProfile from './components/EditProfile';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    const [user, setUser] = useState(null);
+    const [currentUsername, setCurrentUsername] = useState(null); // For the viewed profile's username
+
+    // Check if a user is logged in on component mount
+    useEffect(() => {
+        const loggedInUser = localStorage.getItem("user");
+        if (loggedInUser) {
+            setUser(JSON.parse(loggedInUser));
+        }
+    }, []);
+
+    // Wrapper component to extract the username from URL params and pass it to the wrapped component
+    const UsernameWrapper = ({ Component, ...rest }) => {
+        const { username } = useParams(); // Get the username from the URL params
+        useEffect(() => {
+            setCurrentUsername(username); // Set the viewed profile's username in App's state
+        }, [username]);
+
+        // Pass the current username and other props to the wrapped component
+        return <Component {...rest} username={username} />;
+    };
+
+    return (
+        <Router>
+            {/* Pass the logged-in user and setUser as props to Navbar */}
+            <Navbar user={user} setUser={setUser} viewedUsername={currentUsername} /> 
+
+            <Routes>
+                {/* Wrap each component in UsernameWrapper to extract and pass the username */}
+                <Route path="/:username/overview" element={<UsernameWrapper Component={Overview} />} />
+                <Route path="/:username/repositories" element={<UsernameWrapper Component={Repositories} />} />
+                
+                {/* For EditProfile, pass user, setUser, and other props */}
+                <Route 
+                    path="/:username/editprofile" 
+                    element={<UsernameWrapper Component={EditProfile} user={user} setUser={setUser} />} 
+                />
+
+                {/* Login and Register routes */}
+                <Route path="/login" element={<Login setUser={setUser} />} />
+                <Route path="/register" element={<Register setUser={setUser} />} />
+            </Routes>
+        </Router>
+    );
+};
 
 export default App;
