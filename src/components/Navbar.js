@@ -20,7 +20,10 @@ const Navbar = ({ user, setUser, viewedUsername }) => { // Receive the viewedUse
         localStorage.removeItem("user");
         setUser(null);  // Clear user state
         
-        await fetch(`${BASE_URL}/logout`, { method: "POST" });
+        await fetch(`${BASE_URL}/logout`, { 
+            method: "POST",
+            credentials: 'include',
+        });
 
         navigate("/login"); // Redirect to login
     };

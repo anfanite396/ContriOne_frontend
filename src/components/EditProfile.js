@@ -18,7 +18,9 @@ const EditProfile = ({ setUser, username }) => {
     useEffect(() => {
         const fetchUserDetails = async () => {
             try {
-                const response = await fetch(`${BASE_URL}/${username}`);
+                const response = await fetch(`${BASE_URL}/${username}`, {
+                    credentials: 'include'
+                });
                 if (response.ok) {
                     const userData = await response.json();
                     setUserDetails(userData);
@@ -57,6 +59,7 @@ const EditProfile = ({ setUser, username }) => {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ platform, username: platformValue }),
+            credentials: 'include'
         });
 
         if (response.ok) {
@@ -72,6 +75,7 @@ const EditProfile = ({ setUser, username }) => {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ platform }),
+            credentials: 'include',
         });
 
         if (response.ok) {
@@ -89,6 +93,7 @@ const EditProfile = ({ setUser, username }) => {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ platforms }),
+            credentials: 'include',
         });
 
         if (response.ok) {
