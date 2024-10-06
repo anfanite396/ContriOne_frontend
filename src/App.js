@@ -6,9 +6,12 @@ import Repositories from './components/Repositories';
 import Login from './components/Login';
 import Register from './components/Register';
 import EditProfile from './components/EditProfile';
+import Auth from './components/Auth';
+import HomePage from './components/Home';
 
 const App = () => {
     const [user, setUser] = useState(null);
+    const [showLogin, setShowLogin] = useState(true);
     const [currentUsername, setCurrentUsername] = useState(null); // For the viewed profile's username
 
     // Check if a user is logged in on component mount
@@ -33,10 +36,11 @@ const App = () => {
     return (
         <Router>
             {/* Pass the logged-in user and setUser as props to Navbar */}
-            <Navbar user={user} setUser={setUser} viewedUsername={currentUsername} /> 
+            <Navbar user={user} setUser={setUser} viewedUsername={currentUsername} setShowLogin={setShowLogin} /> 
 
             <Routes>
                 {/* Wrap each component in UsernameWrapper to extract and pass the username */}
+                <Route path="/" element={<HomePage />} />
                 <Route path="/:username/overview" element={<UsernameWrapper Component={Overview} />} />
                 <Route path="/:username/repositories" element={<UsernameWrapper Component={Repositories} />} />
                 
@@ -47,8 +51,12 @@ const App = () => {
                 />
 
                 {/* Login and Register routes */}
-                <Route path="/login" element={<Login setUser={setUser} />} />
-                <Route path="/register" element={<Register setUser={setUser} />} />
+                {/* <Route path="/login" element={<Login setUser={setUser} />} />
+                <Route path="/register" element={<Register setUser={setUser} />} /> */}
+                {/* <Route path="/login" element={<Auth setUser={setUser} />} />
+                <Route path="/register" element={<Auth setUser={setUser} />} /> */}
+
+                <Route path="/auth" element={<Auth setUser={setUser} showLogin={showLogin} setShowLogin={setShowLogin} />} />
             </Routes>
         </Router>
     );

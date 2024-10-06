@@ -109,45 +109,56 @@ const EditProfile = ({ setUser, username }) => {
     }
 
     return (
-        <div className="edit-profile">
-            <h2>Edit Profile for {username}</h2>
-
-            {/* Display User Info */}
-            <div className="user-info">
-                <p><strong>Name:</strong> {user.name}</p>
-                <p><strong>Email:</strong> {user.email}</p>
-                <p><strong>Username:</strong> {user.username}</p>
-            </div>
-
-            {/* Platform Fields */}
-            <div className="platform-section">
-                <h3>Manage Platforms</h3>
-
-                {['github', 'gitlab', 'gerrit'].map((platform) => (
-                    <div key={platform} className="platform-input">
-                        <label>{platform.charAt(0).toUpperCase() + platform.slice(1)}: </label>
-                        <input
-                            type="text"
-                            value={platforms[platform]}
-                            onChange={(e) => handlePlatformChange(e, platform)}
-                            disabled={isPlatformLocked[platform]}
-                        />
-                        {!isPlatformLocked[platform] && (
-                            <button onClick={() => handleAddPlatform(platform)}>Add {platform}</button>
-                        )}
-                        {isPlatformLocked[platform] && (
-                            <button onClick={() => handleRemovePlatform(platform)}>Remove {platform}</button>
-                        )}
-                    </div>
-                ))}
-            </div>
-
-            {/* Update User Data */}
-            <div className="update-user-data">
-                <button onClick={handleUpdateUserData}>Update User Data</button>
+        <div className="edit-profile-container">
+            <div className="edit-profile">
+                <h2 className="edit-profile-heading">Edit Profile for {username}</h2>
+    
+                {/* Display User Info */}
+                <div className="user-info">
+                    <p><strong>Name:</strong> {user.name}</p>
+                    <p><strong>Email:</strong> {user.email}</p>
+                    <p><strong>Username:</strong> {user.username}</p>
+                </div>
+    
+                {/* Platform Fields */}
+                <div className="platform-section">
+                    <h3 className="platform-heading">Manage Platforms</h3>
+    
+                    {['github', 'gitlab', 'gerrit'].map((platform) => (
+                        <div key={platform} className="platform-input">
+                            <label className="platform-label">
+                                {platform.charAt(0).toUpperCase() + platform.slice(1)}:
+                            </label>
+                            <input
+                                type="text"
+                                className="platform-text-input"
+                                value={platforms[platform]}
+                                onChange={(e) => handlePlatformChange(e, platform)}
+                                disabled={isPlatformLocked[platform]}
+                            />
+                            {!isPlatformLocked[platform] ? (
+                                <button className="platform-button add-button" onClick={() => handleAddPlatform(platform)}>
+                                    Add {platform}
+                                </button>
+                            ) : (
+                                <button className="platform-button remove-button" onClick={() => handleRemovePlatform(platform)}>
+                                    Remove {platform}
+                                </button>
+                            )}
+                        </div>
+                    ))}
+                </div>
+    
+                {/* Update User Data */}
+                <div className="update-user-data">
+                    <button className="update-button" onClick={handleUpdateUserData}>
+                        Update User Data
+                    </button>
+                </div>
             </div>
         </div>
     );
+    
 };
 
 export default EditProfile;

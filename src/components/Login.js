@@ -40,33 +40,39 @@ const Login = ({ setUser }) => {
     }
 
     return (
-        <div>
-            <h2> Login </h2>
-            <form onSubmit={handleLogin}>
-            <div>
-                <label htmlFor="username">Username</label>
-                <input
-                    type="text"
-                    id=""
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)} // Updates state
-                    required
-                />
-            </div>
-            <div>
-                <label htmlFor="password">Password</label>
-                <input
-                    type="password"
-                    id="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)} // Updates state
-                    required
-                />
-            </div>
-            <button type="submit">Login</button>
-        </form>
+        <div className="login-container">
+            <form className="login-form" onSubmit={handleLogin}>
+                <h2 className="login-heading">Login</h2>
+    
+                <div className="form-group">
+                    <label htmlFor="username" className="form-label">Username</label>
+                    <input
+                        type="text"
+                        id="username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        required
+                        className="form-input"
+                    />
+                </div>
+    
+                <div className="form-group">
+                    <label htmlFor="password" className="form-label">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                        className="form-input"
+                    />
+                </div>
+    
+                <button type="submit" className="login-button">Login</button>
+            </form>
         </div>
-    )
+    );
+    
 };
 
 export default Login;

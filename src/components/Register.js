@@ -47,16 +47,66 @@ const Register = ({ setUser }) => {
         }
     };
 
-    return (
-        <form onSubmit={handleSubmit}>
-            <input name="name" placeholder="Name" value={formData.name} onChange={handleChange} />
-            <input name="username" placeholder="Username" value={formData.username} onChange={handleChange} />
-            <input name="email" placeholder="Email" value={formData.email} onChange={handleChange} />
-            <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} />
+    // return (
+    //     <form onSubmit={handleSubmit}>
+    //         <input name="name" placeholder="Name" value={formData.name} onChange={handleChange} />
+    //         <input name="username" placeholder="Username" value={formData.username} onChange={handleChange} />
+    //         <input name="email" placeholder="Email" value={formData.email} onChange={handleChange} />
+    //         <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} />
 
-            <button type="submit">Register</button>
-        </form>
+    //         <button type="submit">Register</button>
+    //     </form>
+    // );
+
+    return (
+        <div className="register-container">
+            <form className="register-form" onSubmit={handleSubmit}>
+                <h2 className="register-heading">Register</h2>
+                <div className="form-group">
+                    <input 
+                        type="text" 
+                        name="name" 
+                        placeholder="Name" 
+                        value={formData.name} 
+                        onChange={handleChange} 
+                        className="form-input"
+                    />
+                </div>
+                <div className="form-group">
+                    <input 
+                        type="text" 
+                        name="username" 
+                        placeholder="Username" 
+                        value={formData.username} 
+                        onChange={handleChange} 
+                        className="form-input"
+                    />
+                </div>
+                <div className="form-group">
+                    <input 
+                        type="email" 
+                        name="email" 
+                        placeholder="Email" 
+                        value={formData.email} 
+                        onChange={handleChange} 
+                        className="form-input"
+                    />
+                </div>
+                <div className="form-group">
+                    <input 
+                        type="password" 
+                        name="password" 
+                        placeholder="Password" 
+                        value={formData.password} 
+                        onChange={handleChange} 
+                        className="form-input"
+                    />
+                </div>
+                <button type="submit" className="register-button">Register</button>
+            </form>
+        </div>
     );
+    
 };
 
 export default Register;

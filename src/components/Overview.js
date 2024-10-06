@@ -1,33 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchUser, fetchEvents } from '../api/api';
+import { fetchEvents } from '../api/api';
 import CalendarHeatmap from 'react-calendar-heatmap';
 import 'react-calendar-heatmap/dist/styles.css';
+import UserInfo from '../components/UserInfo';  // Import the UserInfo component
 
 const Overview = () => {
     const { username } = useParams();
-    const [userInfo, setUserInfo] = useState(null);
     const [events, setEvents] = useState([]);
     const [selectedDateEvents, setSelectedDateEvents] = useState([]);
 
     useEffect(() => {
-        // Fetch user data and event data
-        const getUserData = async () => {
+        // Fetch event data
+        const getEventData = async () => {
             try {
-                const userData = await fetchUser(username);
-                setUserInfo(userData);
-
                 const eventData = await fetchEvents(username);
                 setEvents(eventData["events"]);
             } catch (error) {
-                console.error('Error fetching user or event data:', error);
+                console.error('Error fetching event data:', error);
             }
         };
 
-        getUserData();
+        getEventData();
     }, [username]);
 
-    if (!userInfo) {
+    if (!events) {
         return <div>Loading...</div>;
     }
 
@@ -64,58 +61,49 @@ const Overview = () => {
     };
 
     return (
-        <div>
-            <h1>{username}'s Overview</h1>
-            <p>Name: {userInfo.name}</p>
-            <p>Email: {userInfo.email}</p>
-            <p>Username: {userInfo.username}</p>
-
-            {/* Existing Platforms */}
-            <div>
-                <h3>Linked Platforms</h3>
-                <ul>
-                    {userInfo.platforms.map((platform) => (
-                        <li key={platform.id}>
-                            {platform.platform}: {platform.username}
-                        </li>
-                    ))}
-                </ul>
-            </div>
-
+        <div className="overview-container">
+          {/* User Info (Left Section) */}
+          <UserInfo />
+          {/* Right Section */}
+          <div className="heatmap-section">
             {/* Heatmap */}
             <div>
-                <h2>Event Heatmap</h2>
-                <CalendarHeatmap
-                    startDate={new Date(new Date().setFullYear(new Date().getFullYear() - 1))}
-                    endDate={new Date()}
-                    values={transformEventDataForHeatmap(events)}
-                    onClick={handleDateClick}
-                    classForValue={(value) => {
-                        if (!value) return 'color-empty';
-                        return `color-scale-${Math.min(value.count, 4)}`;
-                    }}
-                />
+              <h2>Event Heatmap</h2>
+              <CalendarHeatmap
+                startDate={new Date(new Date().setFullYear(new Date().getFullYear() - 1))}
+                endDate={new Date()}
+                values={transformEventDataForHeatmap(events)}
+                onClick={handleDateClick}
+                classForValue={(value) => {
+                  if (!value) return 'color-empty';
+                  return `color-scale-${Math.min(value.count, 4)}`;
+                }}
+              />
             </div>
-
-            {/* Detailed event list for selected date */}
-            <div>
-                {selectedDateEvents.length > 0 ? (
-                    <div>
-                        <h3>Events on {selectedDateEvents[0].created_at.split('T')[0]}</h3>
-                        <ul>
-                            {selectedDateEvents.map((event, index) => (
-                                <li key={index}>
-                                    Event Type: {event.type}, URL: {event.html_url}, Platform: {event.platform}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                ) : (
-                    <p>Select a date to view events.</p>
-                )}
+            {/* Detailed event list for selected date below the heatmap */}
+            <div className="event-list">
+              {selectedDateEvents.length > 0 ? (
+                <div>
+                  <h3>Events on {selectedDateEvents[0].created_at.split('T')[0]}</h3>
+                  <ul>
+                    {selectedDateEvents.map((event, index) => (
+                      <li key={index} className="event-item">
+                        <strong>Event Type:</strong> {event.type},
+                        <strong> URL:</strong> <a href={event.html_url} target="_blank" rel="noopener noreferrer">{event.html_url}</a>,
+                        <strong> Platform:</strong> {event.platform}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : (
+                <p>Select a date to view events.</p>
+              )}
             </div>
+          </div>
         </div>
-    );
+      );
+    
+    
 };
 
 export default Overview;
