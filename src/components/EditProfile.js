@@ -124,7 +124,7 @@ const EditProfile = ({ setUser, username }) => {
                 <div className="platform-section">
                     <h3 className="platform-heading">Manage Platforms</h3>
     
-                    {['github', 'gitlab', 'gerrit'].map((platform) => (
+                    {['github', 'gitlab'].map((platform) => (
                         <div key={platform} className="platform-input">
                             <label className="platform-label">
                                 {platform.charAt(0).toUpperCase() + platform.slice(1)}:

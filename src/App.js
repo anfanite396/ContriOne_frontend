@@ -44,14 +44,14 @@ const App = () => {
             <Navbar user={user} setUser={setUser} viewedUsername={currentUsername} setShowLogin={setShowLogin} /> 
 
             <Routes>
-                <Route path="/" element={<UsernameWrapper Component={HomePage} />} />
+                <Route path="/" element={<UsernameWrapper user={user} Component={HomePage} />} />
                 <Route path="/:username/overview" element={<UsernameWrapper Component={Overview} setUser={setUser} />} />
                 <Route path="/:username/repositories" element={<UsernameWrapper Component={Repositories} setUser={setUser} />} />
                 <Route 
                     path="/:username/editprofile" 
                     element={<UsernameWrapper Component={EditProfile} user={user} setUser={setUser} />} 
                 />
-                <Route path="/auth" element={<Auth setUser={setUser} showLogin={showLogin} setShowLogin={setShowLogin} />} />
+                <Route path="/auth" element={<Auth user={user} setUser={setUser} showLogin={showLogin} setShowLogin={setShowLogin} />} />
             </Routes>
         </Router>
     );

@@ -13,7 +13,7 @@ const Navbar = ({ user, setUser, viewedUsername, setShowLogin }) => {
       method: "POST",
       credentials: 'include',
     });
-    navigate("/login");
+    navigate("/");
   };
 
   const handleLoginClick = () => {

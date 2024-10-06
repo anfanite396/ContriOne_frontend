@@ -1,8 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Login from './Login';
 import Register from './Register';
 
-const Auth = ({ setUser, showLogin, setShowLogin }) => {
+const Auth = ({ user, setUser, showLogin, setShowLogin }) => {
+    const navigate = useNavigate();
+
+    // Redirect to the user's overview page if they are already logged in
+    useEffect(() => {
+        if (user) {
+            navigate(`/${user.username}/overview`);
+        }
+    }, [user, navigate]);
+
     return (
         <div className="auth-container">
             <div className="auth-form-container">
