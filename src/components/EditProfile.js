@@ -97,7 +97,6 @@ const EditProfile = ({ setUser, username }) => {
         });
 
         if (response.ok) {
-            const data = await response.json();
             alert('User data updated successfully.');
         } else {
             alert('Failed to update user data.');
