@@ -5,7 +5,7 @@ import CalendarHeatmap from 'react-calendar-heatmap';
 import 'react-calendar-heatmap/dist/styles.css';
 import UserInfo from '../components/UserInfo';  // Import the UserInfo component
 
-const Overview = () => {
+const Overview = ( user, setUser ) => {
     const { username } = useParams();
     const [events, setEvents] = useState([]);
     const [selectedDateEvents, setSelectedDateEvents] = useState([]);
@@ -63,7 +63,7 @@ const Overview = () => {
     return (
         <div className="overview-container">
           {/* User Info (Left Section) */}
-          <UserInfo />
+          <UserInfo user={user} setUser={setUser} />
           {/* Right Section */}
           <div className="heatmap-section">
             {/* Heatmap */}

@@ -4,17 +4,7 @@ import '../App.css';
 import { BASE_URL } from '../consts';
 
 const Navbar = ({ user, setUser, viewedUsername, setShowLogin }) => {
-  const [isLoggedin, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const loggedInUser = localStorage.getItem("user");
-    if (loggedInUser) {
-      const parsedUser = JSON.parse(loggedInUser);
-      setUser(parsedUser);
-      setIsLoggedIn(true);
-    }
-  }, [setUser]);
 
   const handleLogout = async () => {
     localStorage.removeItem("user");

@@ -39,8 +39,8 @@ const HomePage = () => {
         </ol>
         <p>For more detailed information, check out our contribution guidelines in the respective repositories:</p>
         <ul>
-          <li><a href="https://github.com/yourusername/frontend-repo" target="_blank" rel="noopener noreferrer">Frontend Repository</a></li>
-          <li><a href="https://github.com/yourusername/backend-repo" target="_blank" rel="noopener noreferrer">Backend Repository</a></li>
+          <li><a href="https://github.com/anfanite396/ContriOne_frontend" target="_blank" rel="noopener noreferrer">Frontend Repository</a></li>
+          <li><a href="https://github.com/anfanite396/ContriOne_backend" target="_blank" rel="noopener noreferrer">Backend Repository</a></li>
         </ul>
       </section>
     </div>

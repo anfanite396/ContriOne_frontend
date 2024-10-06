@@ -6,7 +6,7 @@ import githubLogo from '../assets/images/github-mark/github-mark.png';
 import gitlabLogo from '../assets/images/gitlab-logo-500.png';
 import { fetchUser } from '../api/api';
 
-const UserInfo = () => {
+const UserInfo = ( user, setUser ) => {
     const { username } = useParams(); // Extract username from URL params
     const [userInfo, setUserInfo] = useState(null);
 
