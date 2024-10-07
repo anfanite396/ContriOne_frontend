@@ -3,8 +3,6 @@ import { BrowserRouter as Router, Route, Routes, useParams } from 'react-router-
 import Navbar from './components/Navbar';
 import Overview from './components/Overview';
 import Repositories from './components/Repositories';
-import Login from './components/Login';
-import Register from './components/Register';
 import EditProfile from './components/EditProfile';
 import Auth from './components/Auth';
 import HomePage from './components/Home';
